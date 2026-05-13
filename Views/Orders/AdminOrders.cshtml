@@ -1,0 +1,76 @@
+﻿@model IEnumerable<NextCart.Models.Order>
+
+<h2>Admin Order Panel</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>User</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th>Date</th>
+            <th style="width:220px;">Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.UserId</td>
+                <td>@item.ProductName</td>
+                <td>@item.Quantity</td>
+                <td>@item.TotalPrice</td>
+
+                <td>
+                    <span class="badge bg-success">
+                        @item.Status
+                    </span>
+                </td>
+
+                <td>@item.OrderDate</td>
+
+                <td>
+                    <form asp-controller="Orders"
+                          asp-action="UpdateStatus"
+                          method="post">
+
+                        @Html.AntiForgeryToken()
+
+                        <input type="hidden"
+                               name="id"
+                               value="@item.Id" />
+
+                        <select name="status" class="form-control mb-2">
+                            <option value="Pending"
+                                    selected="@(item.Status == "Pending")">
+                                Pending
+                            </option>
+
+                            <option value="Processing"
+                                    selected="@(item.Status == "Processing")">
+                                Processing
+                            </option>
+
+                            <option value="Shipped"
+                                    selected="@(item.Status == "Shipped")">
+                                Shipped
+                            </option>
+
+                            <option value="Delivered"
+                                    selected="@(item.Status == "Delivered")">
+                                Delivered
+                            </option>
+                        </select>
+
+                        <button type="submit" class="btn btn-primary btn-sm">
+                            Update
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

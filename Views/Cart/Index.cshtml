@@ -1,0 +1,49 @@
+﻿@model IEnumerable<NextCart.Models.CartItem>
+
+<h2>My Cart</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Product.Name</td>
+                <td>@item.Product.Price</td>
+                <td>@item.Quantity</td>
+                <td>@(item.Product.Price* item.Quantity)</td>
+                <td>
+                    <form asp-action="AddToCart" method="post" style="display:inline;">
+                        <input type="hidden" name="productId" value="@item.ProductId" />
+                        <button type="submit" class="btn btn-sm btn-success">
+                            +
+                        </button>
+                    </form>
+
+                    |
+
+                    <a asp-action="Decrease"
+                       asp-route-id="@item.Id">-</a>
+
+                    |
+
+                    <a asp-action="Remove"
+                       asp-route-id="@item.Id">Remove</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-controller="Checkout" asp-action="Index" class="btn btn-success">
+    Proceed to Checkout
+</a>

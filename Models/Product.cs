@@ -1,0 +1,24 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace NextCart.Models
+{
+    public class Product
+    {
+        public int Id { get; set; }
+
+        [Required]
+        public string Name { get; set; }
+
+        [Required]
+        public string Description { get; set; }
+
+        [Required]
+        public double Price { get; set; }
+
+        public string ImageUrl { get; set; }
+
+        public int Stock { get; set; }
+
+        public string Category { get; set; }
+    }
+}

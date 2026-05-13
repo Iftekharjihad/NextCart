@@ -1,0 +1,36 @@
+﻿@model IEnumerable<NextCart.Models.Order>
+
+<h2>My Orders</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th>Order Date</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ProductName</td>
+                <td>@item.Price</td>
+                <td>@item.Quantity</td>
+                <td>@item.TotalPrice</td>
+
+                <td>
+                    <span class="badge bg-primary">
+                        @item.Status
+                    </span>
+                </td>
+
+                <td>@item.OrderDate</td>
+            </tr>
+        }
+    </tbody>
+</table>
